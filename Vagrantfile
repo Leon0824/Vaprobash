@@ -26,7 +26,8 @@ server_swap           = "768" # Options: false | int (MB) - Guideline: Between o
 # EST        for Eastern Standard Time
 # US/Central for American Central
 # US/Eastern for American Eastern
-server_timezone  = "UTC"
+#server_timezone  = "UTC"
+server_timezone  = "UTC+8"
 
 # Database Configuration
 mysql_root_password   = "root"   # We'll assume user "root"
@@ -36,7 +37,8 @@ pgsql_root_password   = "root"   # We'll assume user "root"
 mongo_enable_remote   = "false"  # remote access enabled when true
 
 # Languages and Packages
-php_timezone          = "UTC"    # http://php.net/manual/en/timezones.php
+#php_timezone          = "UTC"    # http://php.net/manual/en/timezones.php
+php_timezone          = "UTC+8"    # http://php.net/manual/en/timezones.php
 php_version           = "5.6"    # Options: 5.5 | 5.6
 ruby_version          = "latest" # Choose what ruby version should be installed (will also be the default version)
 ruby_gems             = [        # List any Ruby Gems that you want to install
@@ -200,6 +202,7 @@ Vagrant.configure("2") do |config|
 
   # Provision Nginx Base
   # config.vm.provision "shell", path: "#{github_url}/scripts/nginx.sh", args: [server_ip, public_folder, hostname, github_url]
+  config.vm.provision "shell", path: "#{github_url}/scripts/nginx.sh", args: [server_ip, public_folder, hostname, github_url]
 
 
   ####
@@ -229,6 +232,7 @@ Vagrant.configure("2") do |config|
 
   # Provision MariaDB
   # config.vm.provision "shell", path: "#{github_url}/scripts/mariadb.sh", args: [mysql_root_password, mysql_enable_remote]
+  config.vm.provision "shell", path: "#{github_url}/scripts/mariadb.sh", args: [mysql_root_password, mysql_enable_remote]
 
   ####
   # Search Servers
@@ -262,6 +266,7 @@ Vagrant.configure("2") do |config|
 
   # Provision Redis (with journaling and persistence)
   # config.vm.provision "shell", path: "#{github_url}/scripts/redis.sh", args: "persistent"
+  config.vm.provision "shell", path: "#{github_url}/scripts/redis.sh", args: "persistent"
   # NOTE: It is safe to run this to add persistence even if originally provisioned without persistence
 
 
